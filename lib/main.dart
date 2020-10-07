@@ -15,16 +15,29 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var question = [
-    'What\'s your favorite color',
-    'What\'s your favorite animal',
-    'What\'s your favorite animal2',
-    'What\'s your favorite animal3',
+    {
+      'textQuestion': 'What\'s your favorite color ',
+      'answers': ['Red', 'Green', 'Blue', 'Yellow']
+    },
+    {
+      'textQuestion': 'What\'s your favorite animal',
+      'answers': ['Cat', 'Dog', 'Chicken']
+    },
+    {
+      'textQuestion': 'What\'s your favorite food ',
+      'answers': ['Sandwich', 'Hamburger', 'Pizza']
+    },
   ];
 
   var _indexQuestion = 0;
 
   void _answerQuestion() {
-    if (_indexQuestion >= question.length - 1) return;
+    if (_indexQuestion >= question.length - 1) {
+      setState(() {
+        _indexQuestion = 0;
+      });
+      return;
+    }
     print('length arr: ${question.length}');
     print('_indexQuestion: ${_indexQuestion}');
     setState(() {
@@ -41,10 +54,11 @@ class _MyAppState extends State<MyApp> {
       ),
       body: Column(
         children: <Widget>[
-          Question(question[_indexQuestion]),
-          Answer("Red", _answerQuestion),
-          Answer("Green", _answerQuestion),
-          Answer("Blue", _answerQuestion),
+          Question(question[_indexQuestion]['textQuestion']),
+          ...(question[_indexQuestion]['answers'] as List<String>)
+              .map((answer) {
+            return Answer(answer, _answerQuestion);
+          })
         ],
       ),
     ));
