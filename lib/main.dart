@@ -19,25 +19,25 @@ class _MyAppState extends State<MyApp> {
     {
       'textQuestion': 'What\'s your favorite color ',
       'answers': [
-        {'text': 'Red', 'score': 11},
-        {'text': 'Green', 'score': 13},
-        {'text': 'Blue', 'score': 12},
-        {'text': 'Yellow', 'score': 14},
+        {'text': 'Red', 'score': 3},
+        {'text': 'Green', 'score': 10},
+        {'text': 'Blue', 'score': 15},
+        {'text': 'Yellow', 'score': 25},
       ]
     },
     {
       'textQuestion': 'What\'s your favorite animal',
       'answers': [
         {'text': 'Cat', 'score': 5},
-        {'text': 'Dog', 'score': 4},
-        {'text': 'Chicken', 'score': 8},
+        {'text': 'Dog', 'score': 14},
+        {'text': 'Chicken', 'score': 28},
       ]
     },
     {
       'textQuestion': 'What\'s your favorite food ',
       'answers': [
-        {'text': 'Sandwich', 'score': 23},
-        {'text': 'Hamburger', 'score': 32},
+        {'text': 'Sandwich', 'score': 7},
+        {'text': 'Hamburger', 'score': 16},
         {'text': 'Chicken', 'score': 27},
       ],
     },
@@ -52,6 +52,13 @@ class _MyAppState extends State<MyApp> {
       _indexQuestion = _indexQuestion + 1;
     });
     print(_totalScore);
+  }
+
+  void _resetScore() {
+    setState(() {
+      _indexQuestion = 0;
+      _totalScore = 0;
+    });
   }
 
   @override
@@ -73,6 +80,6 @@ class _MyAppState extends State<MyApp> {
                       })
                     ],
                   )
-                : Result()));
+                : Result(_totalScore, _resetScore)));
   }
 }
